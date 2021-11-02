@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_clear.c                                     :+:    :+:            */
+/*   rbtree_clear.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 21:57:02 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:28:13 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/11/02 21:02:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree_int.h>
+#include <rbtree_int.h>
 
 /*
 **	Go left or right until you hit a leaf node, delete the leaf node and
 **	set node back to the '&parent->(left/right)' of its parent
 */
-void	bstree_clear(t_bstree *bstree)
+void	rbtree_clear(t_rbtree *rbtree)
 {
 	t_node	**node;
 	t_node	**parent;
 
-	node = &bstree->root;
+	node = &rbtree->root;
 	while (*node)
 	{
 		if ((*node)->left)
@@ -30,13 +30,13 @@ void	bstree_clear(t_bstree *bstree)
 			node = &(*node)->right;
 		else
 		{
-			if (*node == bstree->root || (*node)->parent == bstree->root)
-				parent = &bstree->root;
+			if (*node == rbtree->root || (*node)->parent == rbtree->root)
+				parent = &rbtree->root;
 			else if ((*node)->parent->parent->left == (*node)->parent)
 				parent = &(*node)->parent->parent->left;
 			else
 				parent = &(*node)->parent->parent->right;
-			node_delete(node, bstree->del);
+			node_delete(node, rbtree->del);
 			node = parent;
 		}
 	}

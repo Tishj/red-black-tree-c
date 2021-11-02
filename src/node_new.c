@@ -6,11 +6,11 @@
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 09:45:54 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:46:55 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/11/02 21:02:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree_int.h>
+#include <rbtree_int.h>
 #include <stdlib.h>
 
 t_node	*node_new(void *key, size_t keysize, void *val, t_node *parent)

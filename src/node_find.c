@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree_int.h>
+#include <rbtree_int.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -27,7 +27,7 @@ static size_t	min(size_t a, size_t b)
 **	that the node should be inserted at.
 **	sets 'parent' to the parent of the node
 */
-t_node	**node_find(t_bstree *bstree, void *key,
+t_node	**node_find(t_rbtree *rbtree, void *key,
 		size_t keysize, t_node **parent)
 {
 	t_node	**node;
@@ -35,11 +35,11 @@ t_node	**node_find(t_bstree *bstree, void *key,
 
 	if (parent)
 		*parent = NULL;
-	node = &bstree->root;
+	node = &rbtree->root;
 	while (*node)
 	{
-		res = bstree->comp((*node)->key, key,
-				bstree->key_type_size * min((*node)->size, keysize));
+		res = rbtree->comp((*node)->key, key,
+				rbtree->key_type_size * min((*node)->size, keysize));
 		if (!res)
 			return (node);
 		if (parent)

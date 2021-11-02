@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_int.h                                            :+:    :+:            */
+/*   rbtree_int.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
@@ -10,25 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BSTREE_H
-# define BSTREE_H
+#ifndef rbtree_H
+# define rbtree_H
 
-#include <bstree_int.h>
+#include <rbtree_int.h>
 #include <stdbool.h>
 
-void			bstree_clear(t_bstree *bstree);
-int				bstree_delete(t_bstree *bstree, void *key, size_t keysize);
-int				bstree_init(t_bstree *bstree, size_t key_type_size,
+void			rbtree_clear(t_rbtree *rbtree);
+int				rbtree_delete(t_rbtree *rbtree, void *key, size_t keysize);
+int				rbtree_init(t_rbtree *rbtree, size_t key_type_size,
 				t_compare comp, t_destructor del);
-void			*bstree_find(t_bstree *bstree, void *key, size_t keysize);
-int				bstree_insert(t_bstree *bstree, void *key, size_t keysize,
+void			*rbtree_find(t_rbtree *rbtree, void *key, size_t keysize);
+int				rbtree_insert(t_rbtree *rbtree, void *key, size_t keysize,
 				void *val);
-int				bstree_assign(t_bstree *bstree, void *key, size_t keysize,
+int				rbtree_assign(t_rbtree *rbtree, void *key, size_t keysize,
 				void *val);
 
 t_node			*node_next(t_node *node);
 t_node			*node_prev(t_node *node);
-t_node			*node_lowest(t_bstree *bstree);
-t_node			*node_highest(t_bstree *bstree);
+t_node			*node_lowest(t_rbtree *rbtree);
+t_node			*node_highest(t_rbtree *rbtree);
 
 #endif

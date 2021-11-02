@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_assign.c                                    :+:    :+:            */
+/*   rbtree_assign.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 09:44:43 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:45:33 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/11/02 21:02:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree_int.h>
+#include <rbtree_int.h>
 
-int	bstree_assign(t_bstree *bstree, void *key, size_t keysize, void *val)
+int	rbtree_assign(t_rbtree *rbtree, void *key, size_t keysize, void *val)
 {
 	t_node	**node;
 	t_node	*parent;
 
-	node = node_find(bstree, key, keysize, &parent);
+	node = node_find(rbtree, key, keysize, &parent);
 	if (!*node)
 	{
 		*node = node_new(key, keysize, val, parent);
-		bstree->size++;
+		rbtree->size++;
 		if (*node)
 			return (1);
 		return (0);
 	}
-	if (bstree->del)
-		bstree->del((*node)->val);
+	if (rbtree->del)
+		rbtree->del((*node)->val);
 	(*node)->val = val;
 	return (1);
 }

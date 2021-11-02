@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_delete.c                                    :+:    :+:            */
+/*   rbtree_delete.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 21:49:59 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:50:10 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/11/02 21:02:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree_int.h>
+#include <rbtree_int.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
@@ -77,26 +77,26 @@ static void	delete_two_children(t_node **node, t_destructor del)
 **	if parent is NULL, the node is ROOT
 **	node is &parent->(left/right)
 */
-int	bstree_delete(t_bstree *bstree, void *key, size_t keysize)
+int	rbtree_delete(t_rbtree *rbtree, void *key, size_t keysize)
 {
 	t_node	**node;
 	t_node	*parent;
 	bool	left_child;
 	bool	right_child;
 
-	if (!bstree->size)
+	if (!rbtree->size)
 		return (1);
-	node = node_find(bstree, key, keysize, &parent);
+	node = node_find(rbtree, key, keysize, &parent);
 	if (!*node)
 		return (1);
 	left_child = ((*node)->left != NULL);
 	right_child = ((*node)->right != NULL);
 	if (left_child && right_child)
-		delete_two_children(node, bstree->del);
+		delete_two_children(node, rbtree->del);
 	else if (left_child || right_child)
-		delete_one_child(node, bstree->del);
+		delete_one_child(node, rbtree->del);
 	else
-		node_delete(node, bstree->del);
-	bstree->size--;
+		node_delete(node, rbtree->del);
+	rbtree->size--;
 	return (1);
 }

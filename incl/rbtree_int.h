@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_int.h                                       :+:    :+:            */
+/*   rbtree_int.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 09:19:53 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:48:33 by tbruinem      ########   odam.nl         */
+/*   Updated: 2021/11/02 21:09:42 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BSTREE_INT_H
-# define BSTREE_INT_H
+#ifndef RBTREE_INT_H
+# define RBTREE_INT_H
 
 #include <stddef.h>
 
@@ -19,6 +19,11 @@ typedef void (*t_destructor)(void *);
 typedef int (*t_compare)(void *a, void *b, size_t size);
 
 typedef struct s_node	t_node;
+
+enum e_color {
+	BLACK,
+	RED
+};
 
 struct	s_node
 {
@@ -30,14 +35,15 @@ struct	s_node
 	t_node		*parent;
 };
 
-typedef struct	s_bstree
+typedef struct	s_rbtree
 {
 	size_t			size;
 	size_t			key_type_size;
 	t_node			*root;
 	t_compare		comp;
 	t_destructor	del;
-}				t_bstree;
+	enum e_color	color;
+}				t_rbtree;
 
 int				util_atoi(char *str);
 size_t			util_strlen(char *str);
@@ -54,7 +60,6 @@ void			util_swap(void *a, void *b, size_t type_size);
 t_node			*node_new(void *key, size_t keysize,
 				void *val, t_node *parent);
 void			node_delete(t_node **node, t_destructor del);
-t_node			**node_find(t_bstree *bstree, void *key,
+t_node			**node_find(t_rbtree *rbtree, void *key,
 				size_t keysize, t_node **parent);
-
 #endif

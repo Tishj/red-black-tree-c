@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bstree_init.c                                      :+:    :+:            */
+/*   bstree_insert.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tbruinem <tbruinem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/21 21:47:36 by tbruinem      #+#    #+#                 */
-/*   Updated: 2021/03/24 09:28:13 by tbruinem      ########   odam.nl         */
+/*   Created: 2021/03/21 21:47:24 by tbruinem      #+#    #+#                 */
+/*   Updated: 2021/11/02 21:02:44 by tbruinem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bstree_int.h>
+#include <rbtree_int.h>
+#include <stdio.h>
 
-int	bstree_init(t_bstree *bstree, size_t key_type_size,
-	t_compare comp, t_destructor del)
+int	rbtree_insert(t_rbtree *rbtree, void *key, size_t keysize, void *val)
 {
-	bstree->key_type_size = key_type_size;
-	bstree->root = NULL;
-	bstree->size = 0;
-	if (comp)
-		bstree->comp = comp;
-	else
-		bstree->comp = util_memcmp;
-	bstree->del = del;
+	t_node	**node;
+	t_node	*parent;
+
+	node = node_find(rbtree, key, keysize, &parent);
+	if (!*node)
+	{
+		*node = node_new(key, keysize, val, parent);
+		rbtree->size++;
+		if (*node)
+			return (1);
+		return (0);
+	}
 	return (1);
 }
